@@ -2,16 +2,46 @@
 
 ### Prerequisited
 
-download mongodb
+#### Without Docker
 
-run:
+* download mongodb
+
+* run:
 	sudo service mongod start
 
-install the pip requirements
+* install the pip requirements
 
 	pip install -r requirements.txt
 
-run:
+* Create a file keys.txt with your twitter keys
+
+* run:
 
 	python3 pymongo_tweepy.py
 
+
+#### With Docker
+
+* install docker
+
+* create a file keys.txt with your twitter keys
+
+* run:
+
+  docker build -t tweet-mongo:latest .
+
+* Once this completes, run
+
+  docker run -itd --name=tweet-mongoc tweet-mongo
+
+* Check that the container is running, using:
+
+  docker container ls
+
+* Run:
+
+  docker exec -it tweet-mongoc /bin/bash
+
+* within the container, you can now run
+
+  python3 pymongo_tweepy.py
