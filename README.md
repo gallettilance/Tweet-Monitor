@@ -26,6 +26,8 @@
 
 * create a file keys.txt with your twitter keys
 
+* delete the .dockerignore file so that your keys.txt are copied into the container
+
 * run:
 
   docker build -t tweet-mongo:latest .
