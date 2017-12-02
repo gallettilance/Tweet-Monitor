@@ -1,12 +1,13 @@
 # Twitter Monitor
 
-### Prerequisited
+## Prerequisites
 
 #### Without Docker
 
 * download mongodb
 
 * run:
+
 	sudo service mongod start
 
 * install the pip requirements
@@ -30,20 +31,20 @@
 
 * run:
 
-  docker build -t tweet-mongo:latest .
+    	docker build -t tweet-mongo:latest .
 
 * Once this completes, run
 
-  docker run -itd --name=tweet-mongoc tweet-mongo
+  	docker run -itd --name=tweet-mongoc tweet-mongo
 
 * Check that the container is running, using:
 
-  docker container ls
+  	docker container ls
 
 * Run:
 
-  docker exec -it tweet-mongoc /bin/bash
+  	docker exec -it tweet-mongoc /bin/bash
 
 * within the container, you can now run
 
-  python3 pymongo_tweepy.py
+ 	 python3 pymongo_tweepy.py
