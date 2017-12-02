@@ -4,6 +4,7 @@ client = MongoClient('localhost', 27017)
 db = client['twitterdb']
 collection = db['twitter_search']
 tweets_iterator = collection.find()
+
 for tweet in tweets_iterator:
   print('tweet text: ',tweet['text'])
   print('user\'s screen name: ',tweet['user']['screen_name'])
