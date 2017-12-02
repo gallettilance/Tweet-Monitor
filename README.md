@@ -8,17 +8,17 @@
 
 * run:
 
-	sudo service mongod start
+   	sudo service mongod start
 
 * install the pip requirements
 
-	pip install -r requirements.txt
+   	pip install -r requirements.txt
 
 * Create a file keys.txt with your twitter keys
 
 * run:
 
-	python3 pymongo_tweepy.py
+   	python3 pymongo_tweepy.py
 
 
 #### With Docker
