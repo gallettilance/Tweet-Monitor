@@ -1,4 +1,4 @@
-# Twitter Monitor
+# Tweet Monitor
 
 ## Prerequisites
 
