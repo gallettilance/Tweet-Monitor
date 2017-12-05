@@ -1,7 +1,30 @@
 from pymongo import MongoClient
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
+from emoji import UNICODE_EMOJI
 
+
+
+client = MongoClient('localhost', 27017)
+db = client['usa_db']
+collection = db['usa_tweets_collection']
+tweets_iterator = collection.find()
+
+d = dict()
+i = 0
+for tweet in tweets_iterator:
+  for word in tweet['text'].split():
+    if word in UNICODE_EMOJI:
+      try:
+        d[word] += 1
+      except KeyError:
+        d[word] = 1
+
+d = sorted(d.items(), key=lambda x: -x[1])
+print(d)
+
+      
+'''
 client = MongoClient('localhost', 27017)
 db = client['twitterdb']
 collection = db['twitter_search']
@@ -23,7 +46,7 @@ for tweet in tweets_iterator:
     if blob.sentiment.classification == 'neu':
       print('neutral sentiment for the tweet: ', tweet['text'])
 
-  '''
+  
   print('tweet text: ',tweet['text'])
   print('user\'s screen name: ',tweet['user']['screen_name'])
   print('user\'s name: ',tweet['user']['name'])
@@ -34,9 +57,10 @@ for tweet in tweets_iterator:
     print('retweeted\'s screen name: ', tweet['retweeted_status']['user']['screen_name'])
   except KeyError:
       pass
-  '''
-
+  
 
 print(tweetCnt)
 print()
 print(locEnabled)
+'''
+

@@ -1,5 +1,6 @@
 certifi==2017.11.5
 chardet==3.0.4
+emoji==0.4.5
 idna==2.6
 nltk==3.2.5
 oauthlib==2.0.6
