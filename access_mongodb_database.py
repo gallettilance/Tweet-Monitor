@@ -21,7 +21,7 @@ for tweet in tweets_iterator:
         d[word] = 1
 
 d = sorted(d.items(), key=lambda x: -x[1])
-print(d)
+print(d[:15])
 
       
 '''
