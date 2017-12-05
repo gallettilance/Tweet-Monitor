@@ -6,7 +6,9 @@ from pymongo import MongoClient
 MONGO_HOST = 'mongodb://localhost/twitterdb'  # assuming you have mongoDB installed locally
 # and a database called 'twitterdb'
 
-WORDS = ['#bigdata', '#AI', '#datascience', '#machinelearning', '#ml', '#deeplearning']
+WORDS = ['#deeplearning', '#computervision', '#datascience', '#bigdata']
+LOCATION = [-127.3,24.1,-65.9,51.8]
+
 
 keys_file = open("keys.txt")
 lines = keys_file.readlines()
@@ -33,20 +35,24 @@ class StreamListener(tweepy.StreamListener):
             client = MongoClient(MONGO_HOST)
 
             # Use twitterdb database. If it doesn't exist, it will be created.
-            db = client.twitterdb
+            #db = client.twitterdb
 
+            db = client.usa_db
+            
             # Decode the JSON from Twitter
             datajson = json.loads(data)
 
             # grab the 'created_at' data from the Tweet to use for display
             created_at = datajson['created_at']
+            if datajson['coordinates']:
+                # print out a message to the screen that we have collected a tweet
+                print("Tweet collected at " + str(created_at))
 
-            # print out a message to the screen that we have collected a tweet
-            print("Tweet collected at " + str(created_at))
-
-            # insert the data into the mongoDB into a collection called twitter_search
-            # if twitter_search doesn't exist, it will be created.
-            db.twitter_search.insert(datajson)
+                # insert the data into the mongoDB into a collection called twitter_search
+                # if twitter_search doesn't exist, it will be created.
+                
+                #db.twitter_search.insert(datajson)
+                db.usa_tweets_collection.insert(datajson)
         except Exception as e:
             print(e)
 
@@ -56,5 +62,6 @@ auth.set_access_token(access_token, access_token_secret)
 # Set up the listener. The 'wait_on_rate_limit=True' is needed to help with Twitter API rate limiting.
 listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True))
 streamer = tweepy.Stream(auth=auth, listener=listener)
-print("Tracking: " + str(WORDS))
-streamer.filter(track=WORDS)
+#print("Tracking: " + str(WORDS))
+print("Tracking: " + 'United States')
+streamer.filter(locations=LOCATION)
