@@ -45,8 +45,8 @@ d = sorted(d.items(), key=lambda x: -x[1])
 print(d[:5])
 '''
 
-#count emoji usage for MA
 '''
+#count emoji usage for MA
 d = dict()
 i = 0
 for tweet in tweets_iterator:
@@ -54,7 +54,7 @@ for tweet in tweets_iterator:
     if word in UNICODE_EMOJI and tweet['user']['location'] is not None:
       if ',' in list(tweet['user']['location']):
           state = tweet['user']['location'].split(',')[1]
-          if state == 'MA' or state == 'Massachussetts':
+          if state == 'MA' or state == 'Massachussetts' or state == ' MA' or state == ' Massachussetts' or state == 'MA ' or state == 'Massachussetts ' or state == ' MA ' or state == ' Massachussetts ':
             try:
               d[word] += 1
             except KeyError:
@@ -64,10 +64,8 @@ d = sorted(d.items(), key=lambda x: -x[1])
 print(d[:5])
 '''
 
-
-
-#count emoji usage per state
 '''
+#count emoji usage per state
 d = dict()
 i = 0
 for tweet in tweets_iterator:
@@ -85,6 +83,43 @@ d = sorted(d.items(), key=lambda x: -x[1])
 print(d[:5])
 '''
 
+#top tweeting states
+'''
+d = dict()
+i = 0
+for tweet in tweets_iterator:
+  if tweet['user']['location'] is not None:
+    if ',' in list(tweet['user']['location']):
+      state = tweet['user']['location'].split(',')[1]
+      try:
+        d[state] += 1
+      except KeyError:
+        d[state] = 1
+        
+d = sorted(d.items(), key=lambda x: -x[1])
+print(d[:5])
+'''
+
+
+#top tweeting cities in CA
+'''
+d = dict()
+i = 0
+for tweet in tweets_iterator:
+  if tweet['user']['location'] is not None:
+    if ',' in list(tweet['user']['location']):
+      state = tweet['user']['location'].split(',')[1]
+      if state == 'CA' or state == ' CA' or state == ' California' or state == 'California':
+        city = tweet['user']['location'].split(',')[0]
+        print(city)
+        try:
+          d[city] += 1
+        except KeyError:
+          d[city] = 1
+        
+d = sorted(d.items(), key=lambda x: -x[1])
+print(d[:5])
+'''
 
 #sentiment analysis      
 '''
