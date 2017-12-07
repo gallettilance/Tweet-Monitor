@@ -2,13 +2,23 @@ from pymongo import MongoClient
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 from emoji import UNICODE_EMOJI
-
+import folium
 
 client = MongoClient('localhost', 27017)
 db = client['usa_db']
 collection = db['usa_tweets_collection']
 tweets_iterator = collection.find()
 
+mymap = folium.Map(location=[45.372, -121.6972], zoom_start=4)
+
+i = 0
+
+for tweet in tweets_iterator:
+    if i %3 == 0:
+        folium.CircleMarker(location=list(reversed(tweet['coordinates']['coordinates']))).add_to(mymap)
+    i +=1
+    
+mymap.save('map.html')
 
 #count emoji occurences
 '''
