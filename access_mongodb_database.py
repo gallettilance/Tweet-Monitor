@@ -12,9 +12,8 @@ tweets_iterator = collection.find()
 mymap = folium.Map(location=[45.372, -121.6972], zoom_start=4)
 
 i = 0
-
 for tweet in tweets_iterator:
-    if i %3 == 0:
+    if i % 3 == 0:
         folium.CircleMarker(location=list(reversed(tweet['coordinates']['coordinates']))).add_to(mymap)
     i +=1
     

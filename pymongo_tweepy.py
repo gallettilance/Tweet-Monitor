@@ -7,7 +7,7 @@ MONGO_HOST = 'mongodb://localhost/twitterdb'  # assuming you have mongoDB instal
 # and a database called 'twitterdb'
 
 WORDS = ['#deeplearning', '#computervision', '#datascience', '#bigdata']
-LOCATION = [-127.3,24.1,-65.9,51.8]
+#LOCATION = [-127.3,24.1,-65.9,51.8]
 
 
 keys_file = open("keys.txt")
@@ -35,9 +35,9 @@ class StreamListener(tweepy.StreamListener):
             client = MongoClient(MONGO_HOST)
 
             # Use twitterdb database. If it doesn't exist, it will be created.
-            #db = client.twitterdb
+            db = client.twitterdb
 
-            db = client.usa_db
+            #db = client.usa_db
             
             # Decode the JSON from Twitter
             datajson = json.loads(data)
@@ -51,8 +51,8 @@ class StreamListener(tweepy.StreamListener):
                 # insert the data into the mongoDB into a collection called twitter_search
                 # if twitter_search doesn't exist, it will be created.
                 
-                #db.twitter_search.insert(datajson)
-                db.usa_tweets_collection.insert(datajson)
+                db.twitter_search.insert(datajson)
+                #db.usa_tweets_collection.insert(datajson)
         except Exception as e:
             print(e)
 
@@ -64,4 +64,5 @@ listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True))
 streamer = tweepy.Stream(auth=auth, listener=listener)
 #print("Tracking: " + str(WORDS))
 print("Tracking: " + 'United States')
-streamer.filter(locations=LOCATION)
+#streamer.filter(locations=LOCATION)
+streamer.filter(track=WORDS)
