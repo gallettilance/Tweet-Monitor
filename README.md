@@ -48,3 +48,8 @@
 * within the container, you can now run
 
          python3 pymongo_tweepy.py
+
+
+## Follow along with jupyter
+
+[Here](./Collection-And-Analysis-Of-Tweets.ipynb) you will find a walk through of the analysis. **Note**: it is still in the process of being written.
