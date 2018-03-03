@@ -1,5 +1,9 @@
 # Tweet Monitor
 
+## Follow along with jupyter
+
+[Here](Notebook/Collection-And-Analysis-Of-Tweets.ipynb) you will find a walk through of the analysis.
+
 ## Prerequisites
 
 #### Without Docker
@@ -16,7 +20,7 @@
 
 * Create a file keys.txt with your twitter keys
 
-* run:
+* Navigate to PyFiles and run:
 
          python3 pymongo_tweepy.py
 
@@ -45,11 +49,6 @@
 
          docker exec -it tweet-mongoc /bin/bash
 
-* within the container, you can now run
+* within the container, navigate to PyFiles and you can now run
 
          python3 pymongo_tweepy.py
-
-
-## Follow along with jupyter
-
-[Here](./Collection-And-Analysis-Of-Tweets.ipynb) you will find a walk through of the analysis.
